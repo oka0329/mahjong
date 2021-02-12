@@ -13,6 +13,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/','PlayerController@index');
+
+
+Route::get('/select_player','PlayerController@select_p');
+
+Route::post('/select_player_check','PlayerController@player');
+
+Route::get('/ranking','PlayerController@rank');
+
+Route::post('/score','ScoreController@score');
