@@ -5,7 +5,6 @@
   <td>{{$player3->id}}{{$player3->player_name}}</td>
   <td>{{$player4->id}}{{$player4->player_name}}</td>
 </tr>
-{{$table_name}}
 
 
 <form action="/score" method="post">
@@ -35,7 +34,6 @@ try{
       player_id INT(3),
       player__name VARCHAR(10),
       total INT(4),
-      score1 INT(4),
       registry_datetime DATETIME
     )';
   $res = $dbh->query($sql);

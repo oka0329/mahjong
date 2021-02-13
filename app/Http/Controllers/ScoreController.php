@@ -11,22 +11,76 @@ class ScoreController extends Controller
 {
   public function score(Request $request)
   {
-    // $table_name = $request->input('table_name');
-    // $items = DB::table(`'.$table_name.'`)->get();
-    // $id1 = $request->input('id1');
-    // $player1 = DB::table(`'.$table_name.'`)->where('player_id','=',$id1)->first();
-    // $id2 = $request->input('id2');
-    // $player2 = DB::table(`'.$table_name.'`)->where('player_id','=',$id2)->first();
-    // $id3 = $request->input('id3');
-    // $player3 = DB::table(`'.$table_name.'`)->where('player_id','=',$id3)->first();
-    // $id4 = $request->input('id4');
-    // $player4 = DB::table(`'.$table_name.'`)->where('player_id','=',$id4)->first();
-    // $param = ['table_name' => $table_name,'player1' => $player1,'player2' => $player2,'player3' => $player3,'player4' => $player4];
-    // return view('mahjong.score',$param);
     $table_name = $request->input('table_name');
     $items = DB::table("{$table_name}")->get();
-    return view('mahjong.score',['items' => $items]);
+    $count = $request->input('count');
+    if(isset($count)){
+      $count = $count + 1;
+    }else{
+      $count = 1;
+    }
+    $param = ['items' => $items,'table_name' => $table_name,'count' => $count];
+    return view('mahjong.score',$param);
 
   }
-  
+
+  public function score_add(Request $request)
+  {
+    $table_name = $request->input('table_name');
+    $items = DB::table("{$table_name}")->get();
+    $count = $request->input('count');
+    $param = [
+      'items' => $items,
+      'table_name' => $table_name,
+      'count' => $count
+    ];
+    return view('mahjong.score_add',$param);
+  }
+
+  public function score_add_check(Request $request)
+  {
+    $table_name = $request->input('table_name');
+    $player1_score = $request->input('1score');
+    $player2_score = $request->input('2score');
+    $player3_score = $request->input('3score');
+    $player4_score = $request->input('4score');
+    $count = $request->input('count');
+    $items = DB::table("{$table_name}")->get();
+    $param = [
+      'items' => $items,
+      'table_name' => $table_name,
+      'player1_score' => $player1_score,
+      'player2_score' => $player2_score,
+      'player3_score' => $player3_score,
+      'player4_score' => $player4_score,
+      'count' => $count
+    ];
+    $player1_total = DB::table("{$table_name}")->where('id',1)->value('total');
+    $player2_total = DB::table("{$table_name}")->where('id',2)->value('total');
+    $player3_total = DB::table("{$table_name}")->where('id',3)->value('total');
+    $player4_total = DB::table("{$table_name}")->where('id',4)->value('total');
+    $items = DB::table("{$table_name}")->where('id',1)->update([
+      'total' => $player1_total + $player1_score,
+      'score'.$count => $player1_score,
+    ]);
+    $items = DB::table("{$table_name}")->where('id',2)->update([
+      'total' => $player2_total + $player2_score,
+      'score'.$count => $player2_score,
+    ]);
+    $items = DB::table("{$table_name}")->where('id',3)->update([
+      'total' => $player3_total + $player3_score,
+      'score'.$count => $player3_score,
+    ]);
+    $items = DB::table("{$table_name}")->where('id',4)->update([
+      'total' => $player4_total + $player4_score,
+      'score'.$count => $player4_score,
+    ]);
+    return view('mahjong.score_add_check',$param);
+  }
+
+  public function game_index()
+    {
+
+    }
+
 }

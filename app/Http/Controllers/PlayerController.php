@@ -10,7 +10,8 @@ class PlayerController extends Controller
 {
     public function index()
     {
-      return view('mahjong.index');
+      $count = 2;
+      return view('mahjong.index',['count' => $count]);
     }
 
     public function select_p(Request $request)

@@ -23,3 +23,6 @@ Route::post('/select_player_check','PlayerController@player');
 Route::get('/ranking','PlayerController@rank');
 
 Route::post('/score','ScoreController@score');
+Route::post('/score_add','ScoreController@score_add');
+
+Route::post('/score_add_check','ScoreController@score_add_check');
