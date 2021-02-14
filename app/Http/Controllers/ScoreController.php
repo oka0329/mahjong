@@ -78,8 +78,35 @@ class ScoreController extends Controller
     return view('mahjong.score_add_check',$param);
   }
 
-  public function game_index()
+  public function score_confirm(Request $request)
     {
+      $table_name = $request->input('table_name');
+      $player1_total = DB::table("{$table_name}")->where('id',1)->value('total');
+      $player2_total = DB::table("{$table_name}")->where('id',2)->value('total');
+      $player3_total = DB::table("{$table_name}")->where('id',3)->value('total');
+      $player4_total = DB::table("{$table_name}")->where('id',4)->value('total');
+      $player1_id = DB::table("{$table_name}")->where('id',1)->value('player_id');
+      $player2_id = DB::table("{$table_name}")->where('id',2)->value('player_id');
+      $player3_id = DB::table("{$table_name}")->where('id',3)->value('player_id');
+      $player4_id = DB::table("{$table_name}")->where('id',4)->value('player_id');
+      $player1_old_total = DB::table('players')->where('id',$player1_id)->value('total_score');
+      $player2_old_total = DB::table('players')->where('id',$player2_id)->value('total_score');
+      $player3_old_total = DB::table('players')->where('id',$player3_id)->value('total_score');
+      $player4_old_total = DB::table('players')->where('id',$player4_id)->value('total_score');
+      $items = DB::table("players")->where('id',$player1_id)->update([
+        'total_score' => $player1_total + $player1_old_total,
+      ]);
+      $items = DB::table("players")->where('id',$player2_id)->update([
+        'total_score' => $player2_total + $player2_old_total,
+      ]);
+      $items = DB::table("players")->where('id',$player3_id)->update([
+        'total_score' => $player3_total + $player3_old_total,
+      ]);
+      $items = DB::table("players")->where('id',$player4_id)->update([
+        'total_score' => $player4_total + $player4_old_total,
+      ]);
+      $param = ['items' => $items];
+      return view('mahjong.score_confirm',$param);
 
     }
 

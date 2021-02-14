@@ -18,3 +18,9 @@
   <input type="hidden" name="table_name" value="{{$table_name}}">
   <input type="submit" value="新規ゲーム">
 </form>
+<form action="/score_confirm" method="post">
+  @csrf
+  <input type="hidden" name="table_name" value="{{$table_name}}">
+  <input type="submit" value="スコア確定">
+
+</form>
