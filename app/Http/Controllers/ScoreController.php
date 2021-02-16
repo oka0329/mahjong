@@ -110,4 +110,32 @@ class ScoreController extends Controller
 
     }
 
+  public function game_index()
+  {
+    $tables = DB::select('SHOW TABLES');
+    $table_name = array_column($tables, 'Tables_in_mahjong');
+    $items0 = DB::table("{$table_name[0]}")->get();
+    $items1 = DB::table("{$table_name[1]}")->get();
+    $items2 = DB::table("{$table_name[2]}")->get();
+    $items3 = DB::table("{$table_name[3]}")->get();
+    $items = array($items0,$items1,$items2,$items3);
+    $param = ['tables' => $tables,
+              'table_name' => $table_name,
+              'items0' => $items0,
+              'items1' => $items1,
+              'items2' => $items2,
+              'items3' => $items3,
+              'items' => $items,
+            ];
+    return view('mahjong.game_index',$param);
+  }
+
+  public function game_index_detail(Request $request)
+  {
+    $table_name = $request->input('table_name');
+    $items = DB::table("{$table_name}")->get();
+    $param = ['items' => $items,'table_name' => $table_name];
+    return view('mahjong.game_index_detail',$param);
+  }
+
 }
