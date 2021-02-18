@@ -22,6 +22,10 @@ try{
   $dbh -> setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
   $sql = 'ALTER TABLE `'.$table_name.'` ADD score'.$count.' INT(4)';
   $res = $dbh->query($sql);
+  $sql = 'select count(*) from information_schema.columns where table_name = "players"';
+  $res = $dbh->query($sql);
+  foreach($res->fetchAll() as $value)
+    print_r($value[0]);
 }
   catch(PDOException $e) {
 
