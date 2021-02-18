@@ -9,6 +9,7 @@ try{
   $res = $dbh->query($sql);
   foreach($res->fetchAll() as $value)
   $count = $value[0] - 5;
+  $count_add = $count +1;
 }
 catch(PDOException $e) {
   echo $e->getMessage();
@@ -24,17 +25,29 @@ catch(PDOException $e) {
   <td>{{$item->player_id}}</td>
   <td>{{$item->player__name}}</td>
   <td>{{$item->total}}</td>
-  @for($i = 1 ; $i < $count ; $i++)
-  <?php $property = "score".$i;?>
-  <td>{{$item->$property}}</td>
+  @for($i = 1 ; $i <= $count ; $i++)
+  <?php $count_column = "score".$i;?>
+  <td>{{$item->$count_column}}</td>
   @endfor
 </tr>
 @endforeach
+@for($i = 1 ; $i <= $count ; $i++)
+<?php $column_name = "score".$i;?>
+<td>
+  <form action="/score_edit" method="post">
+    @csrf
+    <input type="hidden" name="table_name" value="{{$table_name}}">
+    <input type="hidden" name="column_name" value="{{$column_name}}">
+    <input type="submit" value="編集">
+  </form>
+</td>
+@endfor
+
 </table>
 
 <form action="/score_add" method="post">
   @csrf
-  <input type="hidden" name="count" value="{{$count}}">
+  <input type="hidden" name="count_add" value="{{$count_add}}">
   <input type="hidden" name="table_name" value="{{$table_name}}">
   <input type="submit" value="新規ゲーム">
 </form>

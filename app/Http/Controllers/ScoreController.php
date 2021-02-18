@@ -13,7 +13,7 @@ class ScoreController extends Controller
   {
     $table_name = $request->input('table_name');
     $items = DB::table("{$table_name}")->get();
-    $param = ['items' => $items,'table_name' => $table_name,'count' => $count];
+    $param = ['items' => $items,'table_name' => $table_name,];
     return view('mahjong.score',$param);
 
   }
@@ -22,7 +22,7 @@ class ScoreController extends Controller
   {
     $table_name = $request->input('table_name');
     $items = DB::table("{$table_name}")->get();
-    $count = $request->input('count');
+    $count = $request->input('count_add');
     $param = [
       'items' => $items,
       'table_name' => $table_name,
@@ -107,27 +107,23 @@ class ScoreController extends Controller
   public function game_index()
   {
     $tables = DB::select('SHOW TABLES');
+    // テーブル一覧を配列に代入
     $table_name = array_column($tables, 'Tables_in_mahjong');
-    $count_table_name = count($table_name);
-    // for($i = 0 ; $i <= $count_table_name ; $i++){
-    //   $items.$i = DB::table("{$table_name[$i]}")->get();
-    // }
-    $items0 = DB::table("{$table_name[0]}")->get();
-    $items1 = DB::table("{$table_name[1]}")->get();
-    $items2 = DB::table("{$table_name[2]}")->get();
-    $items3 = DB::table("{$table_name[3]}")->get();
-    $items4 = DB::table("{$table_name[4]}")->get();
-    $items = array($items0,$items1,$items2,$items3,$items4);
-    $count = count($items);
-    $param = ['tables' => $tables,
+    // 末尾2つ（players,migration）のテーブルを消去
+    array_pop($table_name);
+    array_pop($table_name);
+    // テーブル数カウント
+    $count_table = count($table_name);
+    $items = [];
+    // for文の中でそれぞれのテーブルを取り出し配列に代入
+    for($i = 0 ; $i < $count_table ; $i++){
+      $items{$i} = DB::table("{$table_name[$i]}")->get();
+      $items[] = $items{$i};
+    }
+    $param = [
+              'count_table' => $count_table,
               'table_name' => $table_name,
-              'items0' => $items0,
-              'items1' => $items1,
-              'items2' => $items2,
-              'items3' => $items3,
-              'items4' => $items4,
               'items' => $items,
-              'count' => $count,
             ];
     return view('mahjong.game_index',$param);
   }
@@ -138,6 +134,46 @@ class ScoreController extends Controller
     $items = DB::table("{$table_name}")->get();
     $param = ['items' => $items,'table_name' => $table_name];
     return view('mahjong.game_index_detail',$param);
+  }
+
+  public function score_update(Request $request)
+  {
+    $table_name = $request->input('table_name');
+    $column_name = $request->input('column_name');
+    $check = $request->input('check');
+    $msg = '入力してください。';
+    if(isset($check)){
+    for($i = 1 ; $i <= 4 ; $i++)
+    {
+      $player_score{$i} = $request->input($i.'score');
+        $items = DB::table("{$table_name}")->where('id',$i)->update([
+          "$column_name" => $player_score{$i},
+        ]);
+      }
+      $msg = '修正完了';
+    }
+    $items = DB::table("{$table_name}")->get();
+    $param = [
+          'items' => $items,
+          'table_name' => $table_name,
+          'column_name' => $column_name,
+          'msg' => $msg,
+          ];
+    return view('mahjong.score_edit',$param);
+
+
+  }
+  public function score_edit(Request $request)
+  {
+    $table_name = $request->input('table_name');
+    $column_name = $request->input('column_name');
+    $items = DB::table("{$table_name}")->get();
+    $param = [
+          'items' => $items,
+          'table_name' => $table_name,
+          'column_name' => $column_name
+          ];
+    return view('mahjong.score_edit',$param);
   }
 
 }

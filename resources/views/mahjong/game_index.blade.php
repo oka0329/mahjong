@@ -8,16 +8,15 @@ try{
   $sql = 'select count(*) from `information_schema`.`tables` where `table_schema` = "mahjong"';
   $res = $dbh->query($sql);
   foreach($res->fetchAll() as $value)
-  $countt = $value[0] -2;
+  // 全テーブル数からplayers,migrationをのぞいた数をカウント
+  $count = $value[0] -2;
 }
 catch(PDOException $e) {
   echo $e->getMessage();
   die();
 }
 ?>
-
-
- @for($i = 0 ; $i <= $countt ; $i++)
+ @for($i = 0 ; $i < $count ; $i++)
  <table>
    {{$table_name[$i]}}
  <tr><th>ID</th><th>プレーヤー名</th><th>total</th></tr>

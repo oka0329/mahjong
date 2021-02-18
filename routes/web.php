@@ -35,3 +35,5 @@ Route::post('/score_confirm','ScoreController@score_confirm');
 Route::get('/game_index','ScoreController@game_index');
 
 Route::get('/game_index_detail','ScoreController@game_index_detail');
+
+Route::post('/score_edit','ScoreController@score_update');
