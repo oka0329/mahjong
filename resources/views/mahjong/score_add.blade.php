@@ -1,19 +1,43 @@
+@extends('layouts.layout')
 
-<form action="/score_add_check" method="post">
+<!-- headここから -->
+@section('site_title','麻雀スコア記録アプリ')
+@section('stylesheet')
+<link rel="stylesheet" href="assets/css/style.css">
+@endsection
+@section('page_title','新規スコア登録')
+<!-- bodyここから -->
+
+@section('content')
+
+<div class="score_add_section">
+  <p class="text">{{$msg}}</p>
+<?php if($correct != $check){?>
+<form action="/score_add" method="post">
   @csrf
-  <table>
+  <table class="score_add_table">
     @foreach($items as $item)
     <tr>
-      <td>{{$item->player__name}}:</td>
-      <td><input type="text" name="{{$item->id}}score"></td>
+      <td class="name">{{$item->player__name}}</td>
+      <td class="score"><input type="number" name="{{$item->id}}score"></td>
     </tr>
     @endforeach
   </table>
   <input type="hidden" name="count" value={{$count}}>
+  <input type="hidden" name="check" value="true">
   <input type="hidden" name="table_name" value="{{$table_name}}">
-  <input type="submit" value="確認">
+  <button type="submit" class="button">確認</button>
 </form>
+<?php }else{?>
+<form action="/score" method="post">
+  @csrf
+  <input type="hidden" name="table_name" value="{{$table_name}}">
+  <button type="submit" class="button">スコア一覧へ戻る</button>
+</form>
+<?php } ?>
 <?php
+if(isset($check)){
+}else{
 try{
   $dsn = 'mysql:dbname=mahjong;host=localhost;charset=utf8;';
   $user = 'root';
@@ -28,4 +52,7 @@ try{
 echo $e->getMessage();
 die();
 }
+}
  ?>
+</div>
+@endsection

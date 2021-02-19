@@ -82,7 +82,34 @@ ul{
   font-size: 18px;
   text-align: center;
 }
-
+.button{
+  width:500px;
+  margin: 0 auto 30px;
+  font-size: 20px;
+  font-weight: 600;
+  text-align: center;
+  border: 2px solid #36820F;
+  border-radius: 10px;
+}
+.button a{
+  padding: 20px 0;
+}
+button.button{
+  width:90%;
+  font-size: 20px;
+  border: 1px solid #36820F;
+  border-radius: 20px;
+  padding: 5px 0;
+  background: #586530;
+  cursor: pointer;
+  display: block;
+  margin: 0 auto 30px;
+  color:#fff;
+}
+input[type="number"]{
+  width:180px;
+  margin: 0 0 0 auto;
+}
 
 /* レスポンシブ　SP */
 @media screen and (max-width: 641px){

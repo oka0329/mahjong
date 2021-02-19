@@ -21,43 +21,40 @@ class ScoreController extends Controller
 
   public function score_add(Request $request)
   {
+    $check = $request->input('check');
     $table_name = $request->input('table_name');
-    $items = DB::table("{$table_name}")->get();
     $count = $request->input('count_add');
+    if(isset($check)){
+      $count = $request->input('count');
+      if($request->input('1score') + $request->input('2score') + $request->input('3score') + $request->input('4score') != 0){
+        $msg = 'スコアの合計が0ではありません。';
+        $correct = 'false';
+      }else{
+      for($i = 1 ; $i <= 4 ; $i++){
+        $player_score{$i} = $request->input($i.'score');
+        $player_total{$i} = DB::table("{$table_name}")->where('id',$i)->value('total');
+        $items = DB::table("{$table_name}")->where('id',$i)->update([
+          'total' => $player_total{$i} + $player_score{$i},
+          'score'.$count => $player_score{$i},
+        ]);
+    }
+    $msg = '正しく入力されました。';
+    $correct = 'true';
+  }
+}else{
+  $correct = 'false';
+  $msg = 'スコアを入力してください。';
+}
+    $items = DB::table("{$table_name}")->get();
     $param = [
       'items' => $items,
       'table_name' => $table_name,
-      'count' => $count
+      'count' => $count,
+      'msg' => $msg,
+      'check' => $check,
+      'correct' => $correct,
     ];
     return view('mahjong.score_add',$param);
-  }
-
-  public function score_add_check(Request $request)
-  {
-    $table_name = $request->input('table_name');
-    $count = $request->input('count');
-    // 追加されたカラムにスコア代入＆トータルをその分増やす
-    if($request->input('1score') + $request->input('2score') + $request->input('3score') + $request->input('4score') != 0){
-      $msg = 'スコアの合計が0ではありません。';
-    }else{
-    for($i = 1 ; $i <= 4 ; $i++){
-      $player_score{$i} = $request->input($i.'score');
-      $player_total{$i} = DB::table("{$table_name}")->where('id',$i)->value('total');
-      $items = DB::table("{$table_name}")->where('id',$i)->update([
-        'total' => $player_total{$i} + $player_score{$i},
-        'score'.$count => $player_score{$i},
-      ]);
-  }
-  $msg = '正しく入力されました。';
-}
-$items = DB::table("{$table_name}")->get();
-  $param = [
-    'items' => $items,
-    'table_name' => $table_name,
-    'count' => $count,
-    'msg' => $msg,
-  ];
-    return view('mahjong.score_add_check',$param);
   }
 
   public function score_confirm(Request $request)
@@ -73,7 +70,7 @@ $items = DB::table("{$table_name}")->get();
         ]);
       }
       $param = ['items' => $items];
-      return view('mahjong.score_confirm',$param);
+      return redirect('/');
 
     }
 
@@ -114,7 +111,8 @@ $items = DB::table("{$table_name}")->get();
     $table_name = $request->input('table_name');
     $column_name = $request->input('column_name');
     $check = $request->input('check');
-    $msg = '入力してください。';
+    $msg = '正しいスコアを入力してください。';
+    if(isset($check)){
     if($request->input('1score') + $request->input('2score') + $request->input('3score') + $request->input('4score') != 0){
       $msg = 'スコアの合計が0ではありません。';
     }else{
@@ -125,11 +123,13 @@ $items = DB::table("{$table_name}")->get();
           "$column_name" => $player_score{$i},
         ]);
       }
-    }
-    if(isset($check)){
-      $msg = '修正完了';
+      $msg = 'スコア修正完了';
     }
     $items = DB::table("{$table_name}")->get();
+  }else{
+    $items = DB::table("{$table_name}")->get();
+
+  }
     $param = [
           'items' => $items,
           'table_name' => $table_name,

@@ -24,7 +24,6 @@ catch(PDOException $e) {
 <link rel="stylesheet" href="assets/css/style.css">
 @endsection
 @section('page_title','ゲーム一覧')
-
 <!-- bodyここから -->
 @section('content')
 <div class="game_index_section">
@@ -75,7 +74,7 @@ catch(PDOException $e) {
     <form action="/score" method="post">
       @csrf
       <input type="hidden" name="table_name" value="{{$table_name[$i]}}">
-      <input type="submit" value="詳細" id="submit_button">
+      <button type="submit" id="submit_button">詳細</button>
     </form>
   </div>
   </div>

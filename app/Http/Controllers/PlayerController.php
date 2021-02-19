@@ -10,13 +10,12 @@ class PlayerController extends Controller
 {
     public function index()
     {
-      $count = 2;
-      return view('mahjong.index',['count' => $count]);
+      return view('mahjong.index');
     }
 
-    public function select_p(Request $request)
+    public function select_player()
     {
-      $items = player::all();
+      $items = DB::table('players')->get();
       return view('mahjong.select_player',['items' => $items]);
     }
 
@@ -37,15 +36,12 @@ class PlayerController extends Controller
     public function player(Request $request)
     {
       $table_name = $request->input('table_name');
-      $id1 = $request->input('id1');
-      $player1 = DB::table('players')->where('id',$id1)->first();
-      $id2 = $request->input('id2');
-      $player2 = DB::table('players')->where('id',$id2)->first();
-      $id3 = $request->input('id3');
-      $player3 = DB::table('players')->where('id',$id3)->first();
-      $id4 = $request->input('id4');
-      $player4 = DB::table('players')->where('id',$id4)->first();
-      $param = ['table_name' => $table_name,'player1' => $player1,'player2' => $player2,'player3' => $player3,'player4' => $player4];
+      $param = ['table_name' => $table_name,];
+      for($i = 1 ; $i <= 4 ; $i++){
+      $id{$i} = $request->input('id'.$i);
+      $player{$i} =  DB::table('players')->where('id',$id{$i})->first();
+      $param['player'.$i] = $player{$i};
+    }
       return view('mahjong.select_player_check',$param);
     }
 
@@ -53,15 +49,5 @@ class PlayerController extends Controller
     {
       $items = DB::table('players')->orderBy('total_score','desc')->get();
       return view('mahjong.ranking',['items' => $items]);
-    }
-
-    public function score_register(Request $request)
-    {
-
-      return view('mahjong.score_register');
-    }
-
-    public function create_table()
-    {
     }
 }

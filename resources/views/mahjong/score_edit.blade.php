@@ -1,22 +1,55 @@
+<?php
+try{
+  $dsn = 'mysql:dbname=mahjong;host=localhost;charset=utf8;';
+  $user = 'root';
+  $password = 'root';
+  $dbh = new PDO($dsn,$user,$password);
+  $dbh -> setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
+  $sql = 'select count(*) from information_schema.columns where table_name ='.$table_name;
+  $res = $dbh->query($sql);
+  foreach($res->fetchAll() as $value)
+  $count = $value[0] - 5;
+  $count_add = $count +1;
+}
+catch(PDOException $e) {
+  echo $e->getMessage();
+  die();
+}
+?>
+@extends('layouts.layout')
+
+<!-- headここから -->
+@section('site_title','麻雀スコア記録アプリ')
+@section('stylesheet')
+<link rel="stylesheet" href="assets/css/style.css">
+@endsection
+@section('page_title','スコア編集')
+<!-- bodyここから -->
+@section('content')
+<div class="score_edit_section">
 <form action="/score_edit" method="post">
   @csrf
-<table>
-  {{$msg}}
-<tr><th>ID</th><th>スコア</th></tr>
-<br>
+  <p class="text">{{$msg}}</p>
+<table class="score_edit_table">
 @foreach($items as $item)
 <tr>
-  <td>{{$item->player__name}}</td>
-  <td><input type="text" name="{{$item->id}}score" value="{{$item->$column_name}}"></td>
+  <td class="name">{{$item->player__name}}</td>
+  <td class="score">
+    <input type="number" name="{{$item->id}}score" value="{{$item->$column_name}}">
+  </td>
 </tr>
 @endforeach
+</table>
 <input type="hidden" name="table_name" value="{{$table_name}}">
 <input type="hidden" name="column_name" value="{{$column_name}}">
 <input type="hidden" name="check" value="check">
-<input type="submit" value="修正">
+<button type="submit" class="button">修正する</button>
 </form>
 <form action="/score" method="post">
   @csrf
   <input type="hidden" name="table_name" value="{{$table_name}}">
-  <input type="submit" value="戻る">
+  <button type="submit" class="button">スコア一覧へ戻る</button>
 </form>
+</div>
+@endsection
+@section('footer')

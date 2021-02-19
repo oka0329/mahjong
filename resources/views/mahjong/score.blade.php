@@ -24,7 +24,6 @@ catch(PDOException $e) {
 <link rel="stylesheet" href="assets/css/style.css">
 @endsection
 @section('page_title','スコア')
-
 @section('header')
 <div class="new_game">
   <form action="/score_add" method="post">
@@ -42,7 +41,9 @@ catch(PDOException $e) {
   </form>
 </div>
 @endsection
+
 <!-- bodyここから -->
+
 @section('content')
 <div class="score_section">
 <table class="score_table">
@@ -77,5 +78,5 @@ catch(PDOException $e) {
 </tr>
   @endfor
 </table>
-@endsection
 </div>
+@endsection

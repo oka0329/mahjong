@@ -6,7 +6,6 @@
 <link rel="stylesheet" href="assets/css/style.css">
 @endsection
 @section('page_title','プレーヤー登録')
-
 <!-- bodyここから -->
 @section('content')
 <div class="player_add_section">

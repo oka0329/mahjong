@@ -15,8 +15,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/','PlayerController@index');
 
-
-Route::get('/select_player','PlayerController@select_p');
+Route::get('/select_player','PlayerController@select_player');
 
 Route::post('/select_player_check','PlayerController@player');
 
@@ -28,8 +27,6 @@ Route::get('/ranking','PlayerController@rank');
 Route::post('/score','ScoreController@score');
 Route::post('/score_add','ScoreController@score_add');
 Route::post('/score_add_check','ScoreController@post');
-
-Route::post('/score_add_check','ScoreController@score_add_check');
 
 Route::post('/score_confirm','ScoreController@score_confirm');
 

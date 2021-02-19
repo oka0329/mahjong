@@ -18,5 +18,8 @@
     <?php $counter = $counter+1; ?>
     @endforeach
   </table>
+  <div class="button">
+    <a href="/">トップ</a>
+  </div>
 </div>
 @endsection

@@ -7,6 +7,7 @@
   <title>@yield('site_title')</title>
   <link rel="stylesheet" href="assets/css/reset.css">
   <link rel="stylesheet" href="assets/css/common.css">
+  <link rel="stylesheet" href="assets/css/style.css">
   @yield('stylesheet')
 </head>
 <body>
@@ -27,6 +28,7 @@
     </div>
     <div class="l_footer">
       @yield('footer')
+      ©copyright okaken
     </div>
   </div>
 <script type="text/javascript" src="function.js"></script>
