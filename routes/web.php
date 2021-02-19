@@ -27,6 +27,7 @@ Route::get('/ranking','PlayerController@rank');
 
 Route::post('/score','ScoreController@score');
 Route::post('/score_add','ScoreController@score_add');
+Route::post('/score_add_check','ScoreController@post');
 
 Route::post('/score_add_check','ScoreController@score_add_check');
 

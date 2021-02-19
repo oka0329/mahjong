@@ -16,44 +16,66 @@ catch(PDOException $e) {
   die();
 }
 ?>
+@extends('layouts.layout')
 
-<table>
-<tr><th>ID</th><th>total</th></tr>
-<br>
-@foreach($items as $item)
-<tr>
-  <td>{{$item->player_id}}</td>
-  <td>{{$item->player__name}}</td>
-  <td>{{$item->total}}</td>
-  @for($i = 1 ; $i <= $count ; $i++)
-  <?php $count_column = "score".$i;?>
-  <td>{{$item->$count_column}}</td>
-  @endfor
-</tr>
-@endforeach
-@for($i = 1 ; $i <= $count ; $i++)
-<?php $column_name = "score".$i;?>
-<td>
-  <form action="/score_edit" method="post">
+<!-- headここから -->
+@section('site_title','麻雀スコア記録アプリ')
+@section('stylesheet')
+<link rel="stylesheet" href="assets/css/style.css">
+@endsection
+@section('page_title','スコア')
+
+@section('header')
+<div class="new_game">
+  <form action="/score_add" method="post">
+    @csrf
+    <input type="hidden" name="count_add" value="{{$count_add}}">
+    <input type="hidden" name="table_name" value="{{$table_name}}">
+    <button type="submit" id="new_button">＋</button>
+  </form>
+</div>
+<div class="score_confirm">
+  <form action="/score_confirm" method="post">
     @csrf
     <input type="hidden" name="table_name" value="{{$table_name}}">
-    <input type="hidden" name="column_name" value="{{$column_name}}">
-    <input type="submit" value="編集">
+    <button type="submit" id="confirm_button">保存</button>
   </form>
-</td>
-@endfor
-
+</div>
+@endsection
+<!-- bodyここから -->
+@section('content')
+<div class="score_section">
+<table class="score_table">
+  <tr>
+@foreach($items as $item)
+  <th class="head">{{$item->player__name}}</th>
+@endforeach
+<th class="head"></th>
+</tr>
+<tr>
+  @foreach($items as $item)
+  <td class="row_total">{{$item->total}}</td>
+  @endforeach
+  <td></td>
+</tr>
 </table>
-
-<form action="/score_add" method="post">
-  @csrf
-  <input type="hidden" name="count_add" value="{{$count_add}}">
-  <input type="hidden" name="table_name" value="{{$table_name}}">
-  <input type="submit" value="新規ゲーム">
-</form>
-<form action="/score_confirm" method="post">
-  @csrf
-  <input type="hidden" name="table_name" value="{{$table_name}}">
-  <input type="submit" value="スコア確定">
-
-</form>
+<table class="score_table">
+  @for($i = 1 ; $i <= $count ; $i++)
+  <?php $column_name = "score".$i;?>
+  <tr>
+    @foreach($items as $item)
+  <td class="row_score">{{$item->$column_name}}</td>
+    @endforeach
+    <td class="row_form">
+      <form action="/score_edit" method="post">
+        @csrf
+        <input type="hidden" name="table_name" value="{{$table_name}}">
+        <input type="hidden" name="column_name" value="{{$column_name}}">
+        <button type="submit" class="submit_button">＞</button>
+      </form>
+    </td>
+</tr>
+  @endfor
+</table>
+@endsection
+</div>

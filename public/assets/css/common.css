@@ -1,0 +1,94 @@
+@charset "utf-8";
+
+body{
+  margin: 0;
+  padding: 0;
+}
+.a1-m{
+  font-family: 'A1 Mincho',sans-serif;
+}
+.mahjong_contents,
+.mahjong_contents:before,
+.mahjong_contents:after,
+.mahjong_contents *,
+.mahjong_contents *:before,
+.mahjong_contents *:after {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+.mahjong_contents{
+  min-height: 100%;
+}
+.dn_pc{
+  display: none;
+}
+.dn_sp{
+  display: block;
+}
+.mahjong_contents img {
+  width: 100%;
+  height:auto;
+  vertical-align: bottom;
+}
+ul{
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.mahjong_contents a{
+  text-decoration: none;
+  color:#000;
+}
+.mahjong_contents .inner{
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0px 40px;
+  margin-top: 30px;
+  margin-bottom: 30px;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+.flex{
+    display:-webkit-box;
+    display:-ms-flexbox;
+    display:flex;
+  }
+  .mahjong_contents a{
+    transition: all 0.2s ease-in-out;
+    display: block;
+  }
+  .mahjong_contents a:hover{
+    opacity: 0.8;
+  }
+
+
+/* レイアウト */
+.l_header{
+  background: #d3d3d3;
+  padding: 30px 0;
+}
+.l_content{
+  width:1000px;
+  margin: 0 auto;
+}
+.l_footer{
+  padding: 30px 0;
+}
+
+
+
+.header_title{
+  font-size: 18px;
+  text-align: center;
+}
+
+
+/* レスポンシブ　SP */
+@media screen and (max-width: 641px){
+
+.l_content{
+  width:100%;
+  margin: 0 auto;
+}
+}

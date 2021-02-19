@@ -1,0 +1,240 @@
+
+/* /top */
+.top_section{
+  margin: 50px auto 0;
+  width:90%;
+}
+.menu_list{
+  display: block;
+}
+.menu_list_item{
+  width:500px;
+  margin: 0 auto 30px;
+  font-size: 20px;
+  font-weight: 600;
+  text-align: center;
+  border: 2px solid #36820F;
+  border-radius: 10px;
+}
+.menu_list_item a{
+  padding: 20px 0;
+}
+
+/* /player_add */
+.player_add_section{
+  margin:50px auto 0;
+}
+.player_add_section .text{
+  font-size: 16px;
+  line-height: 1.75;
+  letter-spacing: .22em;
+  margin: 0 0 30px;
+}
+.player_add_section input[type="text"]{
+  width:100%;
+  margin: 0 auto 30px;
+  height: 50px;
+  font-size: 24px;
+}
+.player_add_section input#submit_button{
+  width:100%;
+  margin: 0 auto;
+  font-size: 30px;
+  height: 50px;
+  padding: 5px 0;
+  border: 1px solid #36820F;
+  border-radius: 20px;
+  background: #586530;
+  cursor: pointer;
+}
+
+/* /ranking */
+.ranking_section{
+  margin: 50px 0 0;
+}
+.ranking_section .ranking_table{
+  width:90%;
+  margin: 0 auto;
+  text-align: center;
+  border-collapse: collapse;
+}
+.ranking_section .ranking_table tr{
+  width:100%;
+}
+.ranking_section .ranking_table th{
+  width:30%;
+  padding: 15px 0;
+  font-size: 16px;
+  text-align: center;
+}
+.ranking_section .ranking_table td{
+  width:30%;
+  padding: 15px 0;
+  font-size: 16px;
+  text-align: center;
+}
+.ranking_section .ranking_table .head{
+  border-bottom: 2px solid #000;
+}
+.ranking_section .ranking_table .row{
+  border-bottom: 0.5px solid #000;
+  font-size: 16px;
+}
+.ranking_section .ranking_table .row1{
+  font-size: 28px;
+  font-weight: 700;
+}
+.ranking_section .ranking_table .row2{
+  font-size: 24px;
+  font-weight: 600;
+
+}
+.ranking_section .ranking_table .row3{
+  font-size: 20px;
+  font-weight: 500;
+}
+
+/* /game_index */
+.game_index_section{
+  margin: 50px 0 0;
+}
+.game_index_section .game{
+  width:95%;
+  border-bottom: 1px solid #000;
+  margin: 0 auto 20px;
+}
+.game_index_section .game .flex{
+  justify-content: space-between;
+}
+.game_index_section .game_date{
+  font-size: 18px;
+  line-height: 1;
+  letter-spacing: .05em;
+}
+.game_index_section .game_count{
+  font-size: 18px;
+  line-height: 1;
+}
+.game_index_section .game_table{
+  width:100%;
+}
+.game_index_section .game_table th{
+  font-size: 16px;
+  width:25%;
+  line-height: 1;
+  letter-spacing: .1em;
+  font-weight: normal;
+}
+.game_index_section .game_table td{
+  font-size: 16px;
+  width:25%;
+  letter-spacing: .1em;
+  line-height: 1;
+  text-align: center;
+}
+.game_index_section input#submit_button{
+  width:100px;
+  margin: 0 auto;
+  font-size: 16px;
+  height: 30px;
+  border: 1px solid #36820F;
+  border-radius: 10px;
+  background: #586530;
+  cursor: pointer;
+  display: block;
+  margin: 0 0 5px auto;
+  color:#fff;
+}
+
+/* /score */
+.score_section{
+  width:100%;
+}
+.score_section .score_table{
+  width:100%;
+  padding: 0 5px;
+  border-collapse: collapse;
+}
+.score_section .score_table:nth-child(1){
+  background: #d3d3d3;
+}
+.score_table th{
+  font-size: 16px;
+  line-height: 1;
+  letter-spacing: .1em;
+  font-weight: normal;
+  text-align: center;
+}
+.score_table td{
+  font-size: 16px;
+  width:22%;
+  line-height: 1;
+  letter-spacing: .1em;
+  font-weight: normal;
+  text-align: center;
+}
+.score_table .head{
+  padding: 0 0 20px;
+  width:20%;
+}
+.score_table .row_total{
+  padding: 0 0 20px;
+  font-size: 22px;
+}
+.score_table .row_score{
+  padding: 10px 0;
+  font-size: 20px;
+  border-bottom: 1px solid #dcdcdc;
+}
+.score_table .row_form{
+  padding: 5px 0;
+  border-bottom: 1px solid #dcdcdc;
+}
+.score_section button.submit_button{
+  font-size: 20px;
+  border:none;
+  cursor: pointer;
+  color: #000;
+  background: #fff;
+  padding: 5px 10px;
+}
+.header_content{
+  position: relative;
+}
+.new_game button#new_button{
+  font-size: 40px;
+  position: absolute;
+  top:-10px;
+  right:10px;
+  padding: 0 10px;
+  border:none;
+  cursor: pointer;
+  color: #000;
+  background: #d3d3d3;
+}
+.score_confirm button#confirm_button{
+  font-size: 24px;
+  position: absolute;
+  top:5px;
+  left:20px;
+  border:none;
+  cursor: pointer;
+  color: #000;
+  background: #d3d3d3;
+}
+
+
+
+
+
+
+
+
+/* レスポンシブ　SP */
+@media screen and (max-width: 641px){
+
+/* /top */
+.menu_list_item{
+  width:100%;
+}
+}
