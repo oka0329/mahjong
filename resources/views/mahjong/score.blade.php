@@ -34,7 +34,7 @@ catch(PDOException $e) {
   </form>
 </div>
 <div class="score_confirm">
-  <form action="/score_confirm" method="post">
+  <form action="/score_confirm" method="post" onSubmit="return score_confirm_check()">
     @csrf
     <input type="hidden" name="table_name" value="{{$table_name}}">
     <button type="submit" id="confirm_button">保存</button>

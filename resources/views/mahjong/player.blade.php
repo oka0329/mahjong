@@ -21,7 +21,7 @@
       </form>
     </td>
     <td class="row">
-      <form action="/player_delete" method="post" onSubmit="return check()">
+      <form action="/player_delete" method="post" onSubmit="return player_delete_check()">
         @csrf
         <input type="hidden" name="player_id" value="{{$item->id}}">
         <button type="submit" class="button">削除する</button>
@@ -32,6 +32,9 @@
   </table>
 <div class="button">
   <a href="/player_add">プレーヤー追加</a>
+</div>
+<div class="button">
+  <a href="/">トップ</a>
 </div>
 </div>
 @endsection
