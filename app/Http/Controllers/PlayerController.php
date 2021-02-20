@@ -33,7 +33,42 @@ class PlayerController extends Controller
       return redirect('/');
     }
 
-    public function player(Request $request)
+  public function player()
+  {
+    $items = DB::table('players')->get();
+    $param = ['items' => $items];
+    return view('mahjong.player',$param);
+  }
+
+  public function player_edit(Request $request)
+  {
+    $check = $request->input('check');
+    $player_id = $request->input('player_id');
+    $msg = '変更する名前を入力してください。';
+    if(isset($check)){
+      $new_player_name = $request->input('new_player_name');
+      $item = DB::table('players')->where('id',$player_id)->update([
+        'player_name' => $new_player_name,
+      ]);
+      $msg = 'プレーヤー名を変更しました。';
+    }
+    $item = DB::table('players')->where('id',$player_id)->first();
+    $param = [
+      'item' => $item,
+      'msg' => $msg,
+      'player_id' => $player_id,
+    ];
+    return view('mahjong.player_edit',$param);
+  }
+
+  public function player_delete(Request $request)
+  {
+    $player_id = $request->input('player_id');
+    $item = DB::table('players')->where('id',$player_id)->delete();
+    return redirect('/player');
+  }
+
+    public function player_check(Request $request)
     {
       $table_name = $request->input('table_name');
       $param = ['table_name' => $table_name,];

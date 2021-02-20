@@ -22,6 +22,7 @@
 /* /player_add */
 .player_add_section{
   margin:50px auto 0;
+  width:90%;
 }
 .player_add_section .text{
   font-size: 16px;
@@ -276,8 +277,9 @@
   margin: 0 auto 30px;
   color:#fff;
 }
-.score_edit_section input[type="text"]{
-  width:180px;
+input[type="text"]{
+  width:100%;
+  font-size: 24px;
   margin: 0 0 0 auto;
 }
 
@@ -328,6 +330,58 @@
   margin: 0 0 0 auto;
 }
 
+/* /player_select */
+.select_player_section{
+  margin: 50px auto 0;
+  width:90%;
+}
+.select_player_section .name{
+  width:100%;
+  margin: 0 0 30px;
+  font-size: 24px;
+}
+.select_player_section .button{
+  margin: 30px auto 0;
+}
+
+/* /player */
+.player_section{
+  margin: 50px auto 0;
+  width:90%;
+}
+.player_table{
+  width:100%;
+  margin: 0 0 50px;
+}
+.player_table .head{
+  width:30%;
+  text-align: center;
+  font-size: 24px;
+  line-height: 1.5;
+  letter-spacing: .1em;
+  padding: 5px 0;
+}
+.player_table .row{
+  width:20%;
+  text-align: center;
+  padding: 5px 0;
+}
+.player_table .button{
+  margin: 0 auto;
+}
+
+/* /player_edit */
+.player_edit_section{
+  margin: 50px auto 0;
+  width: 90%;
+}
+.player_edit_section .text{
+  font-size: 24px;
+  margin: 0 0 50px;
+}
+.player_edit_section .button{
+  margin: 50px auto 0;
+}
 /* レスポンシブ　SP */
 @media screen and (max-width: 641px){
 

@@ -15,12 +15,15 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/','PlayerController@index');
 
+Route::get('/player','PlayerController@player');
+
 Route::get('/select_player','PlayerController@select_player');
 
-Route::post('/select_player_check','PlayerController@player');
-
+Route::post('/select_player_check','PlayerController@player_chack');
+Route::post('/player_edit','PlayerController@player_edit');
 Route::get('/player_add','PlayerController@player_add');
 Route::post('/player_add','PlayerController@player_create');
+Route::post('/player_delete','PlayerController@player_delete');
 
 Route::get('/ranking','PlayerController@rank');
 

@@ -12,25 +12,25 @@
 <div class="select_player_section">
   <form action="/select_player_check" method="post">
     @csrf
-    <select name="id1">
+    <select name="id1" class="name">
       プレーヤー１
     @foreach($items as $item)
       <option value="{{$item->id}}">{{$item->player_name}}</option>
       @endforeach
     </select>
-    <select name="id2">
+    <select name="id2" class="name">
       プレーヤー２
     @foreach($items as $item)
       <option value="{{$item->id}}">{{$item->player_name}}</option>
       @endforeach
     </select>
-    <select name="id3">
+    <select name="id3" class="name">
       プレーヤー３
     @foreach($items as $item)
       <option value="{{$item->id}}">{{$item->player_name}}</option>
       @endforeach
     </select>
-    <select name="id4">
+    <select name="id4" class="name">
       プレーヤー４
     @foreach($items as $item)
       <option value="{{$item->id}}">{{$item->player_name}}</option>

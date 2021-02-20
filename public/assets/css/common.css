@@ -106,6 +106,10 @@ button.button{
   margin: 0 auto 30px;
   color:#fff;
 }
+button.button:hover{
+  background: #fff;
+  color:#586530;
+}
 input[type="number"]{
   width:180px;
   margin: 0 0 0 auto;
@@ -117,5 +121,10 @@ input[type="number"]{
 .l_content{
   width:100%;
   margin: 0 auto;
+}
+
+
+.button{
+  width:100%;
 }
 }
