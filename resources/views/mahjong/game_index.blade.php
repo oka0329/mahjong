@@ -62,12 +62,21 @@ catch(PDOException $e) {
   </tr>
   @endforeach
   </table>
-  <div class="game_detail_button">
+  <div class="game_index_buttons">
+  <div class="game_index_button">
     <form action="/score" method="post">
       @csrf
       <input type="hidden" name="table_name" value="{{$table_name[$i]}}">
       <button type="submit" id="submit_button">詳細</button>
     </form>
+  </div>
+  <div class="game_index_button">
+    <form action="/game_delete" method="post" onSubmit="return game_delete_check()">
+      @csrf
+      <input type="hidden" name="table_name" value="{{$table_name[$i]}}">
+      <button type="submit" id="submit_button">削除</button>
+    </form>
+  </div>
   </div>
   </div>
   @endfor

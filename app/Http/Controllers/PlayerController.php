@@ -25,13 +25,41 @@ class PlayerController extends Controller
     {
       $table_name = $request->input('table_name');
       $param = ['table_name' => $table_name,];
+      $msg = '参加するプレーヤーを選択してください。';
       for($i = 1 ; $i <= 4 ; $i++){
+      $id[$i] = $request->input('id'.$i);
+      $list[] = $id[$i];
+        }
+      $value_count = array_count_values($list);
+      $max = max($value_count);
+      if($max == 1){
+    for($i = 1 ; $i <= 4 ; $i++){
+      $player[$i] =  DB::table('players')->where('id',$id[$i])->first();
+      $param['player'.$i] = $player[$i];
+      $msg = 'このメンバーでよろしいですか？';
+      $check = 'OK';
+    }
+  }else{
+    $msg = 'プレーヤーが重複しています。';
+    $check = 'NO';
+  }
+  $param['msg'] = $msg;
+  $param['check'] = $check;
+      return view('mahjong.select_player_check',$param);
+    }
+
+  public function player_done(Request $request)
+  {
+    $table_name = $request->input('table_name');
+    for($i = 1 ; $i <= 4 ; $i++){
       $id[$i] = $request->input('id'.$i);
       $player[$i] =  DB::table('players')->where('id',$id[$i])->first();
       $param['player'.$i] = $player[$i];
     }
-      return view('mahjong.select_player_check',$param);
+    $param['table_name'] = $table_name;
+      return view('mahjong.select_player_done',$param);
     }
+
 
   // プレーヤー追加
     public function player_add()

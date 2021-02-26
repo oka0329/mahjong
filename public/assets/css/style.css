@@ -157,7 +157,25 @@
   margin: 0 0 5px auto;
   color:#fff;
 }
+.game_index_section .game_index_buttons{
+  display: flex;
+  justify-content: flex-end;
+}
+.game_index_section .game_index_button:nth-child(1){
+  margin: 0 10px 0 0;
+}
 
+/* /game_delete */
+.game_delete_section{
+  margin: 50px auto 0;
+  width:90%;
+}
+.game_delete_section .text{
+  margin: 0 0 40px;
+  font-size: 24px;
+  line-height: 1.5;
+  letter-spacing: .1em;
+}
 /* /score */
 .score_section{
   width:100%;
@@ -378,6 +396,24 @@ input[type="text"]{
 }
 .select_player_check_section .text{
   margin: 0 0 20px;
+  font-size: 24px;
+  line-height: 1.5;
+  letter-spacing: .1em;
+}
+.select_player_check_section .message{
+  margin: 0 0 40px;
+  font-size: 24px;
+  line-height: 1.5;
+  letter-spacing: .1em;
+}
+
+/* /select_player_done */
+.select_player_done_section{
+  margin: 50px auto 0;
+  width:90%;
+}
+.select_player_done_section .text{
+  margin: 0 0 40px;
   font-size: 24px;
   line-height: 1.5;
   letter-spacing: .1em;

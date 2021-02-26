@@ -128,7 +128,6 @@ class ScoreController extends Controller
     $items = DB::table("{$table_name}")->get();
   }else{
     $items = DB::table("{$table_name}")->get();
-
   }
     $param = [
           'items' => $items,
@@ -137,8 +136,13 @@ class ScoreController extends Controller
           'msg' => $msg,
           ];
     return view('mahjong.score_edit',$param);
+  }
 
-
+  public function game_delete(Request $request)
+  {
+    $table_name = $request->input('table_name');
+    $param = ['table_name' => $table_name];
+    return view('mahjong.game_delete',$param);
   }
 
 }

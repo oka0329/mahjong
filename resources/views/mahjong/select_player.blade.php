@@ -12,8 +12,8 @@
 <div class="select_player_section">
   <form action="/select_player_check" method="post">
     @csrf
+    <p>プレーヤー１</p>
     <select name="id1" class="name">
-      プレーヤー１
     @foreach($items as $item)
       <option value="{{$item->id}}">{{$item->player_name}}</option>
       @endforeach
