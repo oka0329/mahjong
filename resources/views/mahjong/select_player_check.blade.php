@@ -10,12 +10,10 @@
 <!-- bodyここから -->
 @section('content')
 <div class="select_player_check_section">
-  <tr>
-    <td>{{$player1->id}}{{$player1->player_name}}</td>
-    <td>{{$player2->id}}{{$player2->player_name}}</td>
-    <td>{{$player3->id}}{{$player3->player_name}}</td>
-    <td>{{$player4->id}}{{$player4->player_name}}</td>
-  </tr>
+    <p class="text">{{$player1->player_name}}</p>
+    <p class="text">{{$player2->player_name}}</p>
+    <p class="text">{{$player3->player_name}}</p>
+    <p class="text">{{$player4->player_name}}</p>
   <form action="/score" method="post">
     @csrf
     <input type="hidden" name="table_name" value="{{$table_name}}">
@@ -24,11 +22,17 @@
   </form>
   <?php
   try{
-    $dsn = 'mysql:dbname=mahjong;host=localhost;charset=utf8;';
-    $user = 'root';
-    $password = 'root';
-    $dbh = new PDO($dsn,$user,$password);
-    $dbh -> setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
+    // ローカル
+    // $dsn = 'mysql:dbname=mahjong;host=localhost;charset=utf8;';
+    // $user = 'root';
+    // $password = 'root';
+    // 本番
+    // $dsn = 'mysql:dbname=LAA1200931-sub;host=mysql148.phy.lolipop.lan;charset=utf8;';
+    // $user = 'LAA1200931';
+    // $password = 'begijnhof';
+    // $dbh = new PDO($dsn,$user,$password);
+    // $dbh -> setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
+    $dbh = DB::connection()->getPdo();
     $sql = 'CREATE TABLE `'.$table_name.'` (
         id INT(3) AUTO_INCREMENT PRIMARY KEY,
         player_id INT(3),

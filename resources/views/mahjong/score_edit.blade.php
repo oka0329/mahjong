@@ -1,10 +1,6 @@
 <?php
 try{
-  $dsn = 'mysql:dbname=mahjong;host=localhost;charset=utf8;';
-  $user = 'root';
-  $password = 'root';
-  $dbh = new PDO($dsn,$user,$password);
-  $dbh -> setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
+  $dbh = DB::connection()->getPdo();
   $sql = 'select count(*) from information_schema.columns where table_name ='.$table_name;
   $res = $dbh->query($sql);
   foreach($res->fetchAll() as $value)

@@ -39,11 +39,7 @@
 if(isset($check)){
 }else{
 try{
-  $dsn = 'mysql:dbname=mahjong;host=localhost;charset=utf8;';
-  $user = 'root';
-  $password = 'root';
-  $dbh = new PDO($dsn,$user,$password);
-  $dbh -> setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
+  $dbh = DB::connection()->getPdo();
   $sql = 'ALTER TABLE `'.$table_name.'` ADD score'.$count.' INT(4)';
   $res = $dbh->query($sql);
 }

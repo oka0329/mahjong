@@ -31,7 +31,6 @@
     </div>
     <div class="l_footer">
       @yield('footer')
-      ©copyright okaken
     </div>
   </div>
 </body>

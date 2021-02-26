@@ -1,10 +1,6 @@
 <?php
 try{
-  $dsn = 'mysql:dbname=mahjong;host=localhost;charset=utf8;';
-  $user = 'root';
-  $password = 'root';
-  $dbh = new PDO($dsn,$user,$password);
-  $dbh -> setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
+  $dbh = DB::connection()->getPdo();
   $sql = 'select count(*) from `information_schema`.`tables` where `table_schema` = "mahjong"';
   $res = $dbh->query($sql);
   foreach($res->fetchAll() as $value)
@@ -41,11 +37,7 @@ catch(PDOException $e) {
         <p class="game_date">{{$date}}</p>
       <?php
       try{
-        $dsn = 'mysql:dbname=mahjong;host=localhost;charset=utf8;';
-        $user = 'root';
-        $password = 'root';
-        $dbh = new PDO($dsn,$user,$password);
-        $dbh -> setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
+        $dbh = DB::connection()->getPdo();
         $sql = 'select count(*) from information_schema.columns where table_name ='.$table_name[$i];
         $res = $dbh->query($sql);
         // テーブルカラム数からidなどを除き、半荘数を取得

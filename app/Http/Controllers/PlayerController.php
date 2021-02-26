@@ -26,9 +26,9 @@ class PlayerController extends Controller
       $table_name = $request->input('table_name');
       $param = ['table_name' => $table_name,];
       for($i = 1 ; $i <= 4 ; $i++){
-      $id{$i} = $request->input('id'.$i);
-      $player{$i} =  DB::table('players')->where('id',$id{$i})->first();
-      $param['player'.$i] = $player{$i};
+      $id[$i] = $request->input('id'.$i);
+      $player[$i] =  DB::table('players')->where('id',$id[$i])->first();
+      $param['player'.$i] = $player[$i];
     }
       return view('mahjong.select_player_check',$param);
     }

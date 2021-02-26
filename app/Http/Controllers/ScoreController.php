@@ -31,11 +31,11 @@ class ScoreController extends Controller
         $correct = 'false';
       }else{
       for($i = 1 ; $i <= 4 ; $i++){
-        $player_score{$i} = $request->input($i.'score');
-        $player_total{$i} = DB::table("{$table_name}")->where('id',$i)->value('total');
+        $player_score[$i] = $request->input($i.'score');
+        $player_total[$i] = DB::table("{$table_name}")->where('id',$i)->value('total');
         $items = DB::table("{$table_name}")->where('id',$i)->update([
-          'total' => $player_total{$i} + $player_score{$i},
-          'score'.$count => $player_score{$i},
+          'total' => $player_total[$i] + $player_score[$i],
+          'score'.$count => $player_score[$i],
         ]);
     }
     $msg = '正しく入力されました。';
@@ -62,11 +62,11 @@ class ScoreController extends Controller
       $table_name = $request->input('table_name');
       // テーブルのトータルをplayersテーブルのトータルに足す
       for($i = 1 ; $i <= 4 ; $i++){
-        $player_total{$i} = DB::table("{$table_name}")->where('id',$i)->value('total');
-        $player_id{$i} = DB::table("{$table_name}")->where('id',$i)->value('player_id');
-        $player_old_total{$i} = DB::table('players')->where('id',$player_id{$i})->value('total_score');
-        $items = DB::table("players")->where('id',$player_id{$i})->update([
-          'total_score' => $player_total{$i} + $player_old_total{$i},
+        $player_total[$i] = DB::table("{$table_name}")->where('id',$i)->value('total');
+        $player_id[$i] = DB::table("{$table_name}")->where('id',$i)->value('player_id');
+        $player_old_total[$i] = DB::table('players')->where('id',$player_id[$i])->value('total_score');
+        $items = DB::table("players")->where('id',$player_id[$i])->update([
+          'total_score' => $player_total[$i] + $player_old_total[$i],
         ]);
       }
       $param = ['items' => $items];
@@ -87,8 +87,8 @@ class ScoreController extends Controller
     $items = [];
     // for文の中でそれぞれのテーブルを取り出し配列に代入
     for($i = 0 ; $i < $count_table ; $i++){
-      $items{$i} = DB::table("{$table_name[$i]}")->get();
-      $items[] = $items{$i};
+      $items[$i] = DB::table("{$table_name[$i]}")->get();
+      $items[] = $items[$i];
     }
     $param = [
               'count_table' => $count_table,
@@ -118,9 +118,9 @@ class ScoreController extends Controller
     }else{
     for($i = 1 ; $i <= 4 ; $i++)
     {
-      $player_score{$i} = $request->input($i.'score');
+      $player_score[$i] = $request->input($i.'score');
         $items = DB::table("{$table_name}")->where('id',$i)->update([
-          "$column_name" => $player_score{$i},
+          "$column_name" => $player_score[$i],
         ]);
       }
       $msg = 'スコア修正完了';

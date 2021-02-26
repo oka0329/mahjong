@@ -313,18 +313,6 @@ input[type="text"]{
   letter-spacing: .1em;
   width:30%;
 }
-.score_add_section button.button{
-  width:500px;
-  font-size: 20px;
-  border: 1px solid #36820F;
-  border-radius: 20px;
-  padding: 5px 0;
-  background: #586530;
-  cursor: pointer;
-  display: block;
-  margin: 0 auto 30px;
-  color:#fff;
-}
 .score_add_section input[type="number"]{
   width:180px;
   margin: 0 0 0 auto;
@@ -381,6 +369,18 @@ input[type="text"]{
 }
 .player_edit_section .button{
   margin: 50px auto 0;
+}
+
+/* /select_player_check */
+.select_player_check_section{
+  margin: 50px auto 0;
+  width:90%;
+}
+.select_player_check_section .text{
+  margin: 0 0 20px;
+  font-size: 24px;
+  line-height: 1.5;
+  letter-spacing: .1em;
 }
 /* レスポンシブ　SP */
 @media screen and (max-width: 641px){
