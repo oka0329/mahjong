@@ -38,6 +38,16 @@ class ScoreController extends Controller
           'score'.$count => $player_score[$i],
         ]);
     }
+    $score1 = $request->input('1score');
+    $score2 = $request->input('2score');
+    $score3 = $request->input('3score');
+    $score4 = $request->input('4score');
+    $scores = ['player1' => $score1,
+                'player2' => $score2,
+                'player3' => $score3,
+                'player4' =>$score4];
+    rsort($scores);
+
     $msg = '正しく入力されました。';
     $correct = 'true';
   }
@@ -119,8 +129,11 @@ class ScoreController extends Controller
     for($i = 1 ; $i <= 4 ; $i++)
     {
       $player_score[$i] = $request->input($i.'score');
+      $player_old_total[$i] = DB::table("{$table_name}")->where('id',$i)->value('total');
+      $player_old_score[$i] = DB::table("{$table_name}")->where('id',$i)->value($column_name);
         $items = DB::table("{$table_name}")->where('id',$i)->update([
           "$column_name" => $player_score[$i],
+          "total" => $player_old_total[$i] - $player_old_score[$i] + $player_score[$i]
         ]);
       }
       $msg = 'スコア修正完了';
@@ -143,6 +156,11 @@ class ScoreController extends Controller
     $table_name = $request->input('table_name');
     $param = ['table_name' => $table_name];
     return view('mahjong.game_delete',$param);
+  }
+
+  public function total()
+  {
+
   }
 
 }

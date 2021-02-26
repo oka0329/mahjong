@@ -19,7 +19,10 @@
     @foreach($items as $item)
     <tr>
       <td class="name">{{$item->player__name}}</td>
-      <td class="score"><input type="number" name="{{$item->id}}score"></td>
+      <td class="score">
+        <input type="number" name="{{$item->id}}score">
+        
+      </td>
     </tr>
     @endforeach
   </table>
